@@ -1,0 +1,21 @@
+<article class="tasks_show">
+  <h1>詳細画面</h1>
+  <ul class="tasklist">
+    <li>
+      <p><strong>Task_Name:</strong></p>
+      <p><%= @task.title %></P>
+
+      <p><strong>Content:</strong></p>
+      <p><%= @task.content %></p>
+
+      <p><span class="item_name">Task_Name</span> <%= @task.title %></p>
+      <p><span class="item_name">Content</span> <%= @task.content %></p>
+      <p><span class="item_name">Submission_Date</span> <%= l @task.created_at %></p>
+      <p><span class="item_name">Expiration_Date</span> <%= l @task.expired_at %></p>
+      <p><span class="item_name">Status</span> <%= @task.status %></p>
+      <p><span class="item_name">Priority</span> <%= @task.priority %></p>
+    </li>
+  </ul>
+  <br>
+  <p class="goto_back"><%= link_to 'Back', tasks_path %></p>
+</article>

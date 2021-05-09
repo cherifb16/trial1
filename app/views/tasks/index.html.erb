@@ -1,0 +1,87 @@
+<article class="tasks_index">
+  <h1>Tasks_list</h1>
+  <% if notice %>
+    <p class="alert alert-info"><%= notice %></p>
+  <% end %>
+
+  <div class="task_nav">
+    <p class="sort_expired flex">
+      <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
+      <%= link_to "優先順位でソートする", tasks_path(sort_priority: "true") %>
+      <%= link_to "登録日が新しい順に戻す", tasks_path %>
+    </p>
+    <div class="search_box" >
+      <%= form_with(local: true, method: :get, url: tasks_path ) do |form| %>
+        <%= form.label :search_title, "Task_Name" %>
+        <%= form.text_field :search_title, placeholder: "Seach by Task Name" %>
+        <%= form.label :search_status %>
+        <%= form.select :search_status, Task.statuses.keys, { include_blank: 'Please select'} %>
+        <%= form.submit "Search", name: "search" %>
+      <% end %>
+    </div>
+  </div>
+
+  <ul class="tasklist">
+    <% @tasks.each do |task| %>
+      <li>
+        <p>
+          <span class="item_name">
+            Task_Name
+          </span>
+          <div class="item_name tasks-index_item_title" id=<%= "tasks-index_item_title-#{task.id}" %>>
+            <%= task.title %>
+          </div>
+          </p>
+        <p>
+          <span class="item_name">
+            Content
+          </span>
+          <div class="item_name tasks-index_item_content" id=<%= "tasks-index_item_content-#{task.id}" %>>
+            <%= task.content %>
+          </div>
+          </p>
+        <p>
+          <span class="item_name">
+            Submission_Date
+          </span>
+          <div class="item_name tasks-index_item_created_at" id=<%= "tasks-index_item_created_at-#{task.id}" %>>
+            <%= l task.created_at, format: :long %>
+          </div>
+          </p>
+        <p>
+          <span class="item_name">
+            Expiration_Date
+          </span>
+          <div class="item_name tasks-index_item_expired_at" id=<%= "tasks-index_item_expired_at-#{task.id}" %>>
+            <%= l task.expired_at, format: :long  %>
+          </div>
+          </p>
+        <p>
+          <span class="item_name">
+            Status
+          </span>
+          <div class="item_name tasks-index_item_status" id=<%= "tasks-index_item_status-#{task.id}" %>>
+            <%= task.status %>
+          </div>
+          </p>
+        <p>
+          <span class="item_name">
+            Priority
+          </span>
+          <div class="item_name tasks-index_item_priprity" id=<%= "tasks-index_item_priprity-#{task.id}" %>>
+            <%= task.priority %>
+          </div>
+          </p>
+        <p class="btns">
+          <%= link_to 'Show', task_path(task.id) %>
+          <%= link_to 'Edit', edit_task_path(task.id), data: { confirm: 'Are you sure to edit?' } %>
+          <%= link_to 'Destroy', task_path(task.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </p>
+      </li>
+    <% end %>
+  </ul>
+  <div class="pagination_block">
+    <%= paginate @tasks %>
+  </div>
+  <p class="task_new"><%= link_to 'New_Task', new_task_path %></p>
+</article>

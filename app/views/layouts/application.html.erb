@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ManyouKadai</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>  
+      <div class="container">
+        <h1 class = "tasklogo"><%= link_to 'Task Application', tasks_path %></h1>  
+      </div>
+    </header>
+    <div class="container">
+      <%= yield %>
+    </div>
+    <footer>
+      <div class="container">
+        <p class="date"><%= date = Time.new %></p>
+        <p class="copyright">T.Oka All Rights Reseerved.</p>
+      </div>  
+    </footer>
+  </body>
+</html>

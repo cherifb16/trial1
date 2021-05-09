@@ -1,0 +1,38 @@
+<article class="task_confirm">
+  <section class="form_block">
+    <%= form_with(model: @task, url: tasks_path, local: true) do |form| %>
+      <%= form.hidden_field :title %>
+      <%= form.hidden_field :content %>
+      <%= form.hidden_field :expired_at %>
+      <%= form.hidden_field :status %>
+      <%= form.hidden_field :priority %>
+
+      <div class="field">
+        <p>title</p>
+        <p><span class="item_name">Task_Name</span> <%= @task.title %></p>
+      </div>
+      
+      <div class="field">
+        <p>Content</p>
+        <p><span class="item_name">Content</span> <%= @task.content %></p>
+      </div>
+
+      <div class="field">
+        <p><span class="item_name">Expiration</span> <%= l @task.expired_at, format: :long %></p>
+      </div>
+
+      <div class="field">
+        <p><span class="item_name">Status</span> <%= @task.status %></p>
+      </div>
+      
+      <div class="field">
+        <p><span class="item_name">Priority</span> <%= @task.priority %></p>
+      </div>
+    
+      <div class="actions">
+        <%= form.submit  "submit" %>
+        <%= form.submit "back", name: 'back' %>
+      </div>
+    <% end %>
+  </section>
+</article>
